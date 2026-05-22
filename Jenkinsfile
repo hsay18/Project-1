@@ -12,12 +12,10 @@ pipeline{
             }
         }
         stage('Deploy with docker compose'){
-            steps{
-                // existing container if they are running
-                sh 'docker compose down || true'
-                // start app, rebuilding flask image
-                sh 'docker compose up -d --build'
-            }
-        }
+    steps{
+        sh 'export PATH=$PATH:/usr/local/bin:/usr/bin && docker-compose down || true'
+        sh 'export PATH=$PATH:/usr/local/bin:/usr/bin && docker-compose up -d --build'
+    }
+}
     }
 }
